@@ -1,0 +1,31 @@
+<% #side panel "popular tags" on Notes %>
+
+<div class="page-header">
+  <h4><small>Popular Tags</small></h4>
+</div>
+
+<div id="tag_cloud">
+  <% tag_cloud Note.tag_counts.limit(20), %w{s m l} do |tag, css_class| %>
+    <%= link_to tag.name + ' (' + tag.count.to_s + ')', get_tagged_notes_path(tag.name), class: css_class %>
+    <br/>
+  <% end %>
+  <br/>
+  <%= link_to 'more tags...', clouds_index_path, :target => "_blank" %>
+</div>
+
+<% #google adsense %>
+<br/>
+<br/>
+<div class="page-header">
+  <h4><small>Sponsored Links</small></h4>
+</div>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<% #eileensnotes_side_2014 %>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:120px;height:240px"
+     data-ad-client="ca-pub-8886831989200871"
+     data-ad-slot="5024323530"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>

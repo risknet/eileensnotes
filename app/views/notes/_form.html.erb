@@ -1,0 +1,57 @@
+<script type="text/javascript">
+  (function($) {
+      $.fn.extend( {
+          limiter: function(limit, elem) {
+              $(this).on("keyup focus", function() {
+                  setCount(this, elem);
+              });
+              function setCount(src, elem) {
+                  var chars = src.value.length;
+                  if (chars > limit) {
+                      src.value = src.value.substr(0, limit);
+                      chars = limit;
+                  }
+                  elem.html( limit - chars );
+              }
+              setCount($(this)[0], elem);
+          }
+      });
+  })(jQuery);
+  var elem1 = $("#question-chars");
+  $("#note_question").limiter(2000, elem1);
+  var elem2 = $("#title-chars");
+  $("#note_title").limiter(200, elem2);
+</script>
+
+<% title "EileensNotes | Question" %>
+
+<%= form_for(@note) do |f| %>
+  
+  <% if @note.errors.any? %>
+    <div data-alert class="alert-box radius alert">
+      <h3><%= pluralize(@note.errors.count, "error") %> => Oops! Check your input again:</h3>
+      <ul>
+      <% @note.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= render 'layouts/pages/formatting' %>
+
+  <b>Enter your question in details if possible (~2,000 chars)</b>
+
+  <label><span id="question-chars"></span> left</label>
+  <%= f.text_area :question, :rows => "10" %>
+  
+
+  Please use the right tags (keywords) to make your question easily searchable.  
+  <%= link_to 'See current tags', clouds_index_path, :target => "_blank" %>
+  <br/>
+  <b>Enter keyword(s) to categorize your question (use , to separate each keyword. ~40 chars)</b>
+  <%= f.text_field :tag_list %>
+
+  <%= f.submit 'Post', :class => "button tiny radius" %>
+
+<% end %>

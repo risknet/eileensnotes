@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  answer: MyText
+  note: one
+  user: one
+  is_private: false
+
+two:
+  answer: MyText
+  note: one
+  user: one
+  is_private: true

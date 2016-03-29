@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="EileensNotes is an online Q&A site for all students and learners.
+             Post your question or note and share with other people. Help others with your know-hows.">
+    <meta name="keywords" content="study aid, tutor, teacher, ask, study notes, Eileen's notes, Eileen, Q&A, online Q&A, ask question, answer  question, notes,
+             post Q&A, learning, learning online, share notes, help students, teach students">
+    <meta name="msvalidate.01" content="44AD9A4B156E14B63C0B925618004ECE" />
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-32467687-1']);
+      _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+  
+    <title><%= content_for?(:title) ? yield(:title) : "EileensNotes - online Q&A for all students and learners" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag "/favicon.ico" %>
+  </head>
+
+  <body>
+    <% #top bar %>
+    <%= render 'layouts/pages/top' %>
+    <% #zurb foundation is being used here for a global layout %>
+    <div class="row">
+      <div class="small-1 large-1 columns"></div>
+      <div class="small-12 large-10 large-centered columns">
+          <% #falsh messages here %>
+          <%= render 'layouts/pages/messages' %>
+          <% #main contents from action %>
+          <%= yield %>
+      </div>
+      <div class="small-1 large-1 columns"></div>
+    </div>
+    <%= javascript_include_tag "application" %>
+    <% #footer definition %>
+    <%= render 'layouts/pages/footer' %>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<p><%= markdownText(answer.answer) %></p>
+
+<% if user_signed_in? && answer.is_private %>
+	<i class="fi-lock"></i>
+	|
+<% end %>
+<% if user_signed_in? && current_user.id == answer.user_id %>
+	<i class="fi-page-edit"></i>
+  <%= link_to 'Edit', edit_note_answer_path(answer.note_id, answer.id) %>
+  |
+  <i class="fi-trash"></i>
+  <%= link_to 'Delete', note_answer_path(answer.note_id,answer.id), :data => { :confirm => 'Are you sure to delete this answer?' }, method: :delete %>
+  | 
+<% end %>
+<%= distance_of_time_in_words(answer.updated_at, Time.now) %> ago, by
+<%= link_to get_user_name(answer.user_id), get_user_notes_path(answer.user_id) %>
+<hr/>

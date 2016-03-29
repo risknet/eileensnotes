@@ -1,0 +1,24 @@
+<p><span class="label round regular"><%= count_marked_to_review(note.id) %></span>
+  <% if get_marked_to_review(note.id, current_user.id) %>
+    <span class="label round alert">B</span>
+  <% end %>
+  <strong><small> <%= note.title %></small></strong>
+</p>
+<p><%= note.question %></p>
+
+<% if note.answers_count < 1 %> 
+  <%= link_to 'Answer', new_note_answer_path(note) %> |
+<% else %>
+  <i class="fi-torsos"></i>
+  <%= link_to pluralize(note.answers_count,'Answer'), note_answers_path(note) %> |
+<% end %>
+<% if user_signed_in? && current_user.id == note.user_id %>
+  <i class="icon-edit"></i>
+  <%= link_to 'Edit', edit_note_path(note) %> | 
+  <i class="icon-trash"></i>
+  <%= link_to 'Delete', note_path(note), :data => { :confirm => 'Are you sure to delete this note?' }, method: :delete %>
+  |
+<% end %>
+updated <%= distance_of_time_in_words(note.updated_at, Time.now) %> ago |  
+posted <%= distance_of_time_in_words(note.created_at, Time.now) %> ago, by
+<%= get_user_name(note.user_id) %>

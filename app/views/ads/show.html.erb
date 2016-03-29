@@ -1,0 +1,29 @@
+<%= render 'layouts/pages/top_header' %>
+
+<p>** <%= @ad.ad_title %> **</p>
+<hr/>
+<p><%= markdownText(@ad.ad_content) %></p>
+
+<% #genereate tag buttons here %>
+<% if @ad.tags.count > 0 %>
+  Categories: 
+  <% @ad.tags.each do |t| %>
+    <%= link_to t.name, get_tagged_ads_path(t.name) %>&nbsp&nbsp
+  <% end %>
+<% end %>
+<br/>
+<br/>
+
+<% if user_signed_in? && current_user.id == @ad.user_id %>
+  <i class="fi-page-edit"></i>
+  <%= link_to 'Edit', edit_ad_path(@ad) %> | 
+  <i class="fi-trash"></i>
+  <%= link_to 'Delete', ad_path(@ad), :data => { :confirm => 'Are you sure to delete this advertisement?' }, method: :delete %>
+  |  
+<% end %>
+<%= distance_of_time_in_words(@ad.updated_at, Time.now) %> ago, by
+<%= get_user_name(@ad.user_id) %>
+
+<hr/>
+
+<%= link_to '<< back to advertisements', ads_path %>

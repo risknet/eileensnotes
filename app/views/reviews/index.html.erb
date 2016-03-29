@@ -1,0 +1,19 @@
+<% title "EileensNotes | Bookmarks" %>
+
+<%= render 'layouts/pages/top_header' %>
+
+<%= link_to 'ask question', new_note_path, :class=> "label secondary radius" %>
+<%= link_to 'unanswered questions', get_unanswered_notes_path, :class=> "label secondary radius" %>
+<br/>
+<br/>
+
+<% if @notes.empty? %>
+  <%= render 'layouts/pages/nodata' %>
+<% else %>
+  <%= render :partial => @notes %>
+  <%= will_paginate @notes, :page_links => true, :container => false %> 
+<% end %>
+
+<%= render 'layouts/pages/wide_ad_bar' %>
+
+<br />

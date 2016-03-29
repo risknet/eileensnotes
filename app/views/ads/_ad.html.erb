@@ -1,0 +1,15 @@
+<p><%= ad.ad_title %></p>
+
+<i class="fi-magnifying-glass"></i>
+<%= link_to 'Show', ad_path(ad) %> | 
+<% if user_signed_in? && current_user.id == ad.user_id %>
+  <i class="fi-page-edit"></i>
+  <%= link_to 'Edit', edit_ad_path(ad) %> | 
+  <i class="fi-trash"></i>
+  <%= link_to 'Delete', ad_path(ad), :data => { :confirm => 'Are you sure to delete this advertisement?' }, method: :delete %>
+  |
+<% end %>
+updated <%= distance_of_time_in_words(ad.updated_at, Time.now) %> ago, by
+<%= link_to get_user_name(ad.user_id), get_user_notes_path(ad.user_id) %>
+
+<hr/>  

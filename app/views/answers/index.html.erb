@@ -1,0 +1,51 @@
+<% title @note.title %>
+
+<h4><small>Help with your answer</small></h4>
+<br/>
+
+<div class="panel radius">
+  <%= markdownText(@note.question) %>
+  <p>=> asked by <%= link_to get_user_name(@note.user_id), get_user_notes_path(@note.user_id) %></p>
+</div>
+
+<% #genereate tag buttons here %>
+<% if @note.tags.count > 0 %>
+  Categories: 
+  <% @note.tags.each do |t| %>
+    <%= link_to t.name, get_tagged_notes_path(t.name) %>&nbsp&nbsp
+  <% end %>
+<% end %>
+<br/>
+<p>
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="EileensNotes">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  </script>
+</p>
+<hr/>
+
+<%= link_to 'answer', new_note_answer_path(@note), :class=> "label secondary radius" %>
+
+<% if user_signed_in? %>
+  <% if get_marked_to_review(@note.id, current_user.id) %>
+    <%= link_to 'remove bookmark', unmarkreview_path(@note.id), :class => "label secondary radius" %>
+  <% else %>
+    <%= link_to 'bookmark this', marktoreview_path(@note.id), :class => "label secondary radius" %>
+  <% end %>
+<% end %>
+
+<br/>
+<br/>
+<%= link_to '<< back to questions', notes_path %>
+<br/>
+
+<br/>
+<% if @note.answers_count > 0 && @note.answers_count != @answers.count %>
+  <span class="label alert radius"><%= pluralize(@note.answers_count - @answers.count,'Hidden Private Answer') %>
+  </span>
+<% end %>
+
+<%= render :partial => @answers %>
+
+<%= render 'layouts/pages/wide_ad_bar' %>
+
+<br />

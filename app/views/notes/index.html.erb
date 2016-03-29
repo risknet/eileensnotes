@@ -1,0 +1,36 @@
+<% title "EileensNotes | Questions" %>
+
+<%= render 'layouts/pages/top_header' %>
+
+<%= form_tag notes_path, :method => :get do %>
+	<div class="large-8 small-9 columns">
+    	<%= text_field_tag :search, params[:search], :placeholder => "Search Questions" %>
+  </div>
+  <div class="large-4 small-3 columns">
+      <%= submit_tag "Search", :name => nil, :class => "alert tiny button" %>
+  </div>
+<% end %>
+
+<div id="tag_cloud">
+  <% tag_cloud Note.tag_counts.limit(20), %w{s m l} do |tag, css_class| %>
+    <%= link_to tag.name + ' (' + tag.count.to_s + ')', get_tagged_notes_path(tag.name), class: css_class %>
+  <% end %>
+  <br/>
+  <%= link_to 'more tags...', clouds_index_path, :target => "_blank", :class => "label secondary radius" %>
+  <%= link_to 'ask question', new_note_path, :class=> "label secondary radius" %>
+	<%= link_to 'see unanswered questions', get_unanswered_notes_path, :class=> "label secondary radius" %>
+</div>
+<hr/>
+
+<% if @notes.empty? %>
+  <%= render 'layouts/pages/nodata' %>
+<% else %>
+  <%= render :partial => @notes %>
+  <%= will_paginate @notes, :page_links => true, :container => false %> 
+<% end %>
+
+<br/><br/>
+<%= render 'layouts/pages/wide_ad_bar' %>
+
+<br />
+

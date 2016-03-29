@@ -1,0 +1,45 @@
+ <script>
+$(document).foundation();
+</script>
+
+<% title "Sign Up" %>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+		<%= devise_error_messages! %>
+		<h2><small>Sign Up</small></h2>
+ 		<fieldset>
+ 			<label><%= f.label :email %></label>
+ 			<%= f.email_field :email, :autofocus => true, title: "Your email address must be unique", data: {tooltip: true } %>
+
+ 			<label><%= f.label :password %></label>
+ 			<%= f.password_field :password, title: "Your password to sign up", data: {tooltip: true } %>
+
+ 			<label><%= f.label :password_confirmation %></label>
+ 			<%= f.password_field :password_confirmation, title: "Retype your password again", data: {tooltip: true } %>
+
+			<!-- this is a pop-up help window -->
+			<div id="acceptTerms" class="reveal-modal tiny" data-reveal>
+		  	<h4>Terms of Service</h4>
+		  	<p>
+		  			<ul>
+		  				<li>You are responsible of all questions and answers you post</li>
+		  				<li>You should not post any inappropriate question or answer</li>
+		  				<li>You should not post any copyrighted materials</li>
+		  				<li>Your account will be removed without any notice for above reasons</li>
+		  			</ul>
+		  	</p>
+		  	<a class="close-reveal-modal">&#215;</a>
+			</div>
+
+ 			<label>
+ 				<%= f.check_box :terms_of_service %> Accept Terms of Service<br/>
+ 				<a href="#" data-reveal-id="acceptTerms" data-reveal>Please Read Terms of Service</a></label>
+ 				<br/><br/>
+ 			</label>
+ 			
+ 			<%= f.submit "Sign up", :class => "button small radius" %>
+ 			<br/>
+ 		</fieldset>
+<% end %>
+
+<%= render "devise/shared/links" %>

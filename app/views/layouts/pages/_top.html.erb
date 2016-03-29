@@ -1,0 +1,31 @@
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><%= link_to "EileensNotes", root_path %></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <% #Right Nav Section %>
+    <ul class="right">
+      <% if user_signed_in? %>
+        <li><%= link_to get_user_name(current_user.id), edit_user_registration_path %></li>
+        <li class="divider"></li>
+        <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'Sign In', new_user_session_path %></li>
+      <% end %>
+    </ul>
+
+    <% #Left Nav Section %>
+    <ul class="left">
+    	<%= render 'layouts/menu/notes_items' %>
+      <li><%= link_to "About", about_path %></li>
+      <li class="divider"></li>
+      <li><%= link_to "Help", help_index_path %></li>
+      <li class="divider"></li>
+    </ul>
+  </section>
+</nav>
+

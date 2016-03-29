@@ -1,0 +1,12 @@
+<% if @owner.name %>
+  Hello, <%= @owner.name %>
+<% else %>
+  Hello, <%= @owner.email %>
+<% end %>
+
+Your question just received a new answer from one of users.
+<%= @question %>
+
+To check the new answer for this question, just follow this link: <%= @url %>.
+
+Thank you and have a great day!

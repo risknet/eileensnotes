@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ad_title: MyString
+  ad_content: MyText
+  user: one
+  confirmed: false
+
+two:
+  ad_title: MyString
+  ad_content: MyText
+  user: one
+  confirmed: false

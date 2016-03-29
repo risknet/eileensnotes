@@ -1,0 +1,4 @@
+<% if user_signed_in? %>
+  <%= link_to "go to your questions >>", get_user_notes_path(current_user.id) %><br/><br/>
+<% end %>
+  

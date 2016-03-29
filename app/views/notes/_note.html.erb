@@ -1,0 +1,34 @@
+<% #partial for collection of notes %>
+
+<% if user_signed_in? and get_marked_to_review(note.id, current_user.id) %>
+  <font color="red">
+    <%= markdownText(note.question) %>
+  </font>
+<% else %>
+  <%= markdownText(note.question) %>
+<% end %>
+
+<% if note.answers_count < 1 %> 
+  <%= link_to 'Answer', new_note_answer_path(note) %> |
+<% else %>
+  <%= link_to pluralize(note.answers_count,'Answer'), note_answers_path(note) %> |
+<% end %>
+<% total_marked = count_marked_to_review(note.id) %>
+<% if total_marked > 0 %>
+  <i class="fi-torsos"></i><%= total_marked %> |
+<% end %>
+<% if user_signed_in? && current_user.id == note.user_id %>
+  <i class="fi-page-edit"></i>
+  <%= link_to 'Edit', edit_note_path(note) %> |
+  <% if note.answers_count < 1 %>
+    <i class="fi-trash"></i>
+    <%= link_to 'Delete', note_path(note), :data => { :confirm => 'Are you sure to delete this note?' }, method: :delete %>
+    | 
+  <% end %>
+<% end %>
+updated <%= distance_of_time_in_words(note.updated_at, Time.now) %> ago | 
+posted <%= distance_of_time_in_words(note.created_at, Time.now) %> ago, by
+<%= link_to get_user_name(note.user_id), get_user_notes_path(note.user_id) %>
+
+<hr/>
+

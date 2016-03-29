@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    Hello,
+    <% if @owner.name %>
+      <%= @owner.name %>
+    <% else %>
+      <%= @owner.email %>
+    <% end %>
+    <br/><br/>
+    <p>
+      Your question just received a new answer from one of users.
+    </p>
+    <p>
+      <strong><%= @question %></strong><br/>
+      To check the new answer for this question, just follow this link: <%= @url %>.
+    </p>
+    <p>Thank you and have a great day!</p>
+  </body>
+</html>
